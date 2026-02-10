@@ -1,0 +1,32 @@
+/* Starter styles for OneYearOfUs (move/extend as you build the site) */
+:root{
+  --bg:#ffd6e7;
+  --card:#fff3f6;
+  --accent:#ff4d4d;
+  --button:#ff8fb6;
+  --button-hover:#ff6fa0;
+  --muted:#a63b4a;
+  --text:#3a2030;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+html,body{height:100%;margin:0}
+body{
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  color:var(--text);
+}
+.container{width:100%;max-width:980px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.9));border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.12);padding:36px}
+header{text-align:center;margin-bottom:18px}
+h1{margin:8px 0;font-size:44px;letter-spacing:1px;line-height:1}
+.dates{color:var(--accent);font-weight:600;margin-top:6px;font-size:18px}
+.note{font-size:13px;color:#6b3946;margin-top:6px;text-align:center}
+
+/* Small utilities */
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{background:var(--button);border:none;padding:12px 18px;border-radius:10px;color:white;font-weight:700;cursor:pointer;box-shadow:0 6px 12px rgba(0,0,0,0.08);transition:transform .12s ease,background .12s;text-decoration:none;display:inline-flex;gap:10px;align-items:center}
+.btn:hover{transform:translateY(-3px);background:var(--button-hover)}
+
+@media (max-width:640px){h1{font-size:28px}}

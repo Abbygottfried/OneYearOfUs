@@ -3,14 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Test Page</title>
+  <title>One Year of Gus and Abby</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="box">
-    <h1>Test Page</h1>
-    <p>This is a minimal page for testing. Use it to verify layout, animation, or to load resources quickly.</p>
-    <p><a href="index.html">Back to Index</a></p>
-  </div>
-</body>
+  <div class="container" role="main">
+    <header>
+      <h1 id="headline">One Year of Gus and Abby</h1>
+      <div class="dates">April 09 2025 - April 09 2026</div>
+    </header>
 
+    <div class="intro-row">
+      <div>
+        <p class="note">A small collection of memories, stats, and fun — click the buttons to explore.</p>
+        <div class="cta" style="margin-top:12px">
+          <a class="btn" href="adventures.html" title="Our adventures page">🌍 Adventures</a>
+          <a class="btn" href="stats.html" title="Our stats page">📊 Our Stats</a>
+          <a class="btn" href="game.html" title="A little game">🎮 Game</a>
+          <a class="btn" href="slideshow.html" title="Slideshow of pics">📸 Slideshow</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="photos" aria-hidden="false">
+          <img class="thumb" src="img/gus-placeholder.jpg" alt="Gus placeholder" data-index="0">
+          <img class="thumb" src="img/abby-placeholder.jpg" alt="Abby placeholder" data-index="1">
+        </div>
+      </div>
+    </div>
+
+    <p class="note">Tip: add your photos to the <code>img/</code> folder and update the image filenames used above.</p>
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
 </html>
