@@ -15,7 +15,8 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:32px;
+  /* leave extra top space for fixed topbar */
+  padding:96px 32px 32px 32px;
   color:var(--text);
 }
 .container{width:100%;max-width:980px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.9));border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.12);padding:36px}
@@ -30,3 +31,22 @@ h1{margin:8px 0;font-size:44px;letter-spacing:1px;line-height:1}
 .btn:hover{transform:translateY(-3px);background:var(--button-hover)}
 
 @media (max-width:640px){h1{font-size:28px}}
+
+/* top fixed nav bar */
+.topbar{position:fixed;left:0;right:0;top:0;height:64px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.06);z-index:1000;display:flex;align-items:center;justify-content:center}
+.topbar-inner{width:100%;max-width:980px;padding:0 16px;display:flex;gap:10px;align-items:center}
+.nav-btn{background:#fff;border:1px solid rgba(0,0,0,0.06);padding:8px 12px;border-radius:10px;color:var(--text);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 14px rgba(0,0,0,0.06);transition:transform .12s ease,background .12s,color .12s}
+.nav-btn:hover{transform:translateY(-3px);background:var(--button);color:white}
+
+/* bubble headline animation */
+.bubble{font-family:'Fredoka One', "Segoe UI", Roboto, cursive;display:inline-block;font-size:clamp(28px,6vw,56px);color:var(--text);background:transparent;padding:0;margin:0;text-align:center;transform:translateY(60vh);opacity:0;animation:bubbleUp .9s cubic-bezier(.2,.9,.2,1) forwards}
+.bubble{
+  /* subtle bubble-like shadow without a white box background */
+  text-shadow:0 6px 18px rgba(0,0,0,0.10), 0 2px 0 rgba(255,255,255,0.02);
+}
+@keyframes bubbleUp{0%{transform:translateY(60vh) scale(.98);opacity:0}60%{opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  .bubble{animation:none;transform:none}
+  .nav-btn{transition:none}
+}
