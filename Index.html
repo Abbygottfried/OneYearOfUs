@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>One Year of Gus and Abby</title>
+    <style>
+        :root{
+            --bg:#ffd6e7; /* baby pink */
+            --card:#fff3f6;
+            --accent:#ff4d4d; /* red-ish for date */
+            --button:#ff8fb6;
+            --button-hover:#ff6fa0;
+            --muted:#a63b4a;
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        html,body{height:100%;margin:0}
+        body{
+            background:var(--bg);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:32px;
+            color:#3a2030;
+        }
+        .container{
+            width:100%;
+            max-width:980px;
+            background:linear-gradient(180deg, var(--card), rgba(255,255,255,0.85));
+            border-radius:16px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.12);
+            padding:36px;
+        }
+        header{
+            text-align:center;
+            margin-bottom:18px;
+            position:relative; /* for hearts overlay */
+        }
+        h1{
+            margin:8px 0;
+            font-size:44px;
+            letter-spacing:1px;
+            line-height:1;
+        }
+        .dates{
+            color:var(--accent);
+            font-weight:600;
+            margin-top:6px;
+            font-size:18px;
+        }
+        .intro-row{
+            display:flex;
+            gap:18px;
+            align-items:center;
+            justify-content:space-between;
+            flex-wrap:wrap;
+            margin:20px 0 30px;
+        }
+        .photos{
+            display:flex;
+            gap:12px;
+            align-items:center;
+        }
+        .thumb{
+            width:140px;
+            height:96px;
+            border-radius:12px;
+            object-fit:cover;
+            cursor:pointer;
+            box-shadow:0 6px 14px rgba(0,0,0,0.12);
+            border:4px solid rgba(255,255,255,0.6);
+        }
+        .cta{
+            display:flex;
+            gap:12px;
+            flex-wrap:wrap;
+        }
+        .btn{
+            background:var(--button);
+            border:none;
+            padding:12px 18px;
+            border-radius:10px;
+            color:white;
+            font-weight:700;
+            cursor:pointer;
+            box-shadow:0 6px 12px rgba(0,0,0,0.08);
+            transition:transform .12s ease,background .12s;
+            text-decoration:none;
+            display:inline-flex;
+            gap:10px;
+            align-items:center;
+        }
+        .btn:hover{ transform:translateY(-3px); background:var(--button-hover); }
+        .btn.secondary{
+            background:transparent;
+            color:var(--muted);
+            border:2px solid rgba(0,0,0,0.06);
+        }
+        .note{
+            font-size:13px;
+            color:#6b3946;
+            margin-top:6px;
+            text-align:center;
+        }
+
+        /* modal slideshow */
+        .modal{
+            position:fixed;
+            inset:0;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            background:rgba(20,10,12,0.6);
+            z-index:60;
+        }
+        .modal.open{display:flex}
+        .slide{
+            max-width:92%;
+            max-height:86%;
+            border-radius:12px;
+            box-shadow:0 18px 40px rgba(0,0,0,0.5);
+            position:relative;
+            background:white;
+            overflow:hidden;
+        }
+        .slide img{
+            display:block;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+        .controls{
+            position:absolute;
+            inset:0;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            pointer-events:none;
+        }
+        .controls button{
+            pointer-events:auto;
+            background:rgba(255,255,255,0.85);
+            border:none;
+            margin:0 8px;
+            padding:10px 12px;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:18px;
+            box-shadow:0 6px 18px rgba(0,0,0,0.18);
+        }
+        .close{
+            position:absolute;
+            top:10px;
+            right:12px;
+            background:rgba(255,255,255,0.9);
+            border:none;
+            padding:8px 10px;
+            border-radius:8px;
+            cursor:pointer;
+            box-shadow:0 6px 18px rgba(0,0,0,0.18);
+        }
+
+        /* --- headline letter + hearts animation styles --- */
+        .animate-headline{ display:inline-block; white-space:nowrap; }
+        .animate-headline .char{
+            display:inline-block;
+            opacity:0;
+            transform:translateY(28px) rotate(-6deg) scale(.94);
+            animation:letterIn .55s cubic-bezier(.2,.8,.2,1) forwards;
+            animation-delay: calc(var(--i) * 70ms);
+            will-change: transform, opacity;
+        }
+        @keyframes letterIn{ to { opacity:1; transform:translateY(0) rotate(0) scale(1); } }
+
+        .hearts{ position:absolute; left:0; right:0; top:0; bottom:0; pointer-events:none; overflow:visible; }
+        .heart{ position:absolute; line-height:1; transform-origin:center; display:inline-block; animation-name:floatUp; animation-timing-function:ease-out; animation-fill-mode:forwards; opacity:0.95; text-shadow:0 6px 18px rgba(0,0,0,0.12); }
+        @keyframes floatUp{ 0%{ transform:translateY(0) scale(.8) rotate(0); opacity:1 } 100%{ transform:translateY(-160px) translateX(20px) rotate(30deg) scale(1.15); opacity:0 } }
+
+        @media (max-width:640px){
+            h1{font-size:28px}
+            .thumb{width:110px;height:80px}
+        }
+    </style>
+</head>
+<body>
+    <div class="container" role="main">
+        <header>
+            <h1 id="headline" class="animate-headline">One Year of Gus and Abby</h1>
+            <div class="dates">April 09 2025 - April 09 2026</div>
+            <div class="hearts" aria-hidden="true"></div>
+        </header>
+
+        <div class="intro-row">
+            <div>
+                <p class="note">A small collection of memories, stats, and fun — click the buttons to explore.</p>
+                <div class="cta" style="margin-top:12px">
+                    <a class="btn" href="adventures.html" title="Our adventures page">🌍 Adventures</a>
+                    <a class="btn" href="stats.html" title="Our stats page">📊 Our Stats</a>
+                    <a class="btn" href="game.html" title="A little game">🎮 Game</a>
+                    <a class="btn" href="slideshow.html" title="Slideshow of pics">📸 Slideshow</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="photos" aria-hidden="false">
+                    <!-- Replace src with your own photos (e.g. img/gus.jpg) -->
+                    <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect fill='%23ffd6e7' width='100%25' height='100%25'/><g fill='%23ff6fa0'><circle cx='240' cy='240' r='180'/><rect x='480' y='360' width='240' height='160' rx='18'/></g><text x='50%25' y='92%25' font-family='Arial' font-size='40' fill='%2399425a' text-anchor='middle'>Gus</text></svg>" alt="Gus placeholder" data-index="0">
+                    <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect fill='%23ffd6e7' width='100%25' height='100%25'/><g fill='%23ff8fb6'><rect x='80' y='120' width='280' height='280' rx='40'/><circle cx='560' cy='240' r='140'/></g><text x='50%25' y='92%25' font-family='Arial' font-size='40' fill='%2399425a' text-anchor='middle'>Abby</text></svg>" alt="Abby placeholder" data-index="1">
+                </div>
+            </div>
+        </div>
+
+        <p class="note">Tip: replace the placeholder images with your own files in the project folder (update the src to point to them).</p>
+    </div>
+
+    <!-- Modal slideshow (click thumbnails to open) -->
+    <div id="modal" class="modal" aria-hidden="true">
+        <div class="slide" role="dialog" aria-label="Photo slideshow">
+            <button class="close" id="closeBtn">✕</button>
+            <img id="modalImg" src="" alt="Slideshow image">
+            <div class="controls">
+                <button id="prevBtn" aria-label="Previous">◀</button>
+                <button id="nextBtn" aria-label="Next">▶</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple thumbnail-to-modal slideshow. Replace/extend images array with real paths.
+        const images = [
+            // these are the same SVG data URLs as the thumbnails; replace with "img/gus.jpg", etc.
+            "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='900'><rect fill='%23ffd6e7' width='100%25' height='100%25'/><g fill='%23ff6fa0'><circle cx='360' cy='360' r='260'/><rect x='720' y='540' width='360' height='240' rx='24'/></g><text x='50%25' y='92%25' font-family='Arial' font-size='64' fill='%2399425a' text-anchor='middle'>Gus</text></svg>",
+            "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='900'><rect fill='%23ffd6e7' width='100%25' height='100%25'/><g fill='%23ff8fb6'><rect x='120' y='180' width='480' height='480' rx='60'/><circle cx='840' cy='360' r='240'/></g><text x='50%25' y='92%25' font-family='Arial' font-size='64' fill='%2399425a' text-anchor='middle'>Abby</text></svg>"
+        ];
+
+        const thumbs = document.querySelectorAll('.thumb');
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modalImg');
+        const closeBtn = document.getElementById('closeBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let current = 0;
+
+        function openModal(index){
+            current = index;
+            modalImg.src = images[current];
+            modal.classList.add('open');
+            modal.setAttribute('aria-hidden','false');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(){
+            modal.classList.remove('open');
+            modal.setAttribute('aria-hidden','true');
+            document.body.style.overflow = '';
+        }
+        function showNext(delta){
+            current = (current + delta + images.length) % images.length;
+            modalImg.src = images[current];
+        }
+
+        thumbs.forEach((t,i)=> t.addEventListener('click', ()=> openModal(i)));
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e)=> { if(e.target === modal) closeModal(); });
+        prevBtn.addEventListener('click', ()=> showNext(-1));
+        nextBtn.addEventListener('click', ()=> showNext(1));
+
+        // Keyboard support
+        window.addEventListener('keydown', (e)=>{
+            if(modal.classList.contains('open')){
+                if(e.key === 'Escape') closeModal();
+                if(e.key === 'ArrowLeft') showNext(-1);
+                if(e.key === 'ArrowRight') showNext(1);
+            }
+        });
+
+        // --- headline letter split and heart spawn animations ---
+        (function(){
+            const headline = document.getElementById('headline');
+            if(!headline) return;
+            const text = headline.textContent.trim();
+            // clear and rebuild as per-letter spans
+            headline.textContent = '';
+            const frag = document.createDocumentFragment();
+            Array.from(text).forEach((ch, i) => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.style.setProperty('--i', i);
+                span.textContent = ch === ' ' ? '\u00A0' : ch;
+                frag.appendChild(span);
+            });
+            // keep the headline wrapper class for styling
+            headline.classList.add('animate-headline');
+            headline.appendChild(frag);
+
+            // spawn some hearts in the header for a playful effect
+            const heartsContainer = document.querySelector('.hearts');
+            if(!heartsContainer) return;
+            const makeHeart = (delayStart = 0) => {
+                const s = document.createElement('span');
+                s.className = 'heart';
+                s.textContent = '❤️';
+                const left = Math.random() * 80 + 10; // 10% - 90%
+                const top = 40 + Math.random() * 40; // start lower in header
+                const size = Math.random() * 18 + 12; // px
+                const dur = (2.5 + Math.random() * 2.8).toFixed(2) + 's';
+                s.style.left = left + '%';
+                s.style.top = top + '%';
+                s.style.fontSize = size + 'px';
+                s.style.animationDuration = dur;
+                s.style.animationDelay = (delayStart || Math.random() * 1.6).toFixed(2) + 's';
+                heartsContainer.appendChild(s);
+                s.addEventListener('animationend', () => s.remove());
+            };
+
+            // initial burst
+            for(let i=0;i<12;i++) makeHeart(i * 0.06);
+            // keep creating a few over time
+            setInterval(() => makeHeart(0), 1300);
+        })();
+    </script>
+</body>
+</html>
