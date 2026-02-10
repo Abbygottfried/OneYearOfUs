@@ -1,147 +1,22 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>One Year of Gus and Abby</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Test Page</title>
+  <style>
+    /* Minimal local styles so this file is self-contained for testing */
+    html,body{height:100%;margin:0}
+    body{display:flex;align-items:center;justify-content:center;font-family:Segoe UI, Roboto, Arial, sans-serif;background:#fff7fb;color:#3a2030}
+    .box{padding:28px;border-radius:12px;background:#fff;color:#3a2030;box-shadow:0 8px 20px rgba(0,0,0,0.08);text-align:center}
+    a{color:#ff6fa0;text-decoration:none;font-weight:700}
+  </style>
 </head>
 <body>
-    <div class="container" role="main">
-        <header>
-            <h1 id="headline" class="animate-headline">One Year of Gus and Abby</h1>
-            <div class="dates">April 09 2025 - April 09 2026</div>
-            <div class="hearts" aria-hidden="true"></div>
-        </header>
-
-        <div class="intro-row">
-            <div>
-                <p class="note">A small collection of memories, stats, and fun — click the buttons to explore.</p>
-                <div class="cta" style="margin-top:12px">
-                    <a class="btn" href="adventures.html" title="Our adventures page">🌍 Adventures</a>
-                    <a class="btn" href="stats.html" title="Our stats page">📊 Our Stats</a>
-                    <a class="btn" href="game.html" title="A little game">🎮 Game</a>
-                    <a class="btn" href="slideshow.html" title="Slideshow of pics">📸 Slideshow</a>
-                </div>
-            </div>
-
-            <div>
-                <div class="photos" aria-hidden="false">
-                    <!-- Replace src with your own photos (e.g. img/gus.jpg) -->
-                    <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect fill='%23ffd6e7' width='100%25' height='100%25'/><g fill='%23ff6fa0'><circle cx='240' cy='240' r='180'/><rect x='480' y='360' width='240' height='160' rx='18'/></g><text x='50%25' y='92%25' font-family='Arial' font-size='40' fill='%2399425a' text-anchor='middle'>Gus</text></svg>" alt="Gus placeholder" data-index="0">
-                    <img class="thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect fill='%23ffd6e7' width='100%25' height='100%25'/><g fill='%23ff8fb6'><rect x='80' y='120' width='280' height='280' rx='40'/><circle cx='560' cy='240' r='140'/></g><text x='50%25' y='92%25' font-family='Arial' font-size='40' fill='%2399425a' text-anchor='middle'>Abby</text></svg>" alt="Abby placeholder" data-index="1">
-                </div>
-            </div>
-        </div>
-
-        <p class="note">Tip: replace the placeholder images with your own files in the project folder (update the src to point to them).</p>
-    </div>
-
-    <!-- Modal slideshow (click thumbnails to open) -->
-    <div id="modal" class="modal" aria-hidden="true">
-        <div class="slide" role="dialog" aria-label="Photo slideshow">
-            <button class="close" id="closeBtn">✕</button>
-            <img id="modalImg" src="" alt="Slideshow image">
-            <div class="controls">
-                <button id="prevBtn" aria-label="Previous">◀</button>
-                <button id="nextBtn" aria-label="Next">▶</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Simple thumbnail-to-modal slideshow. Replace/extend images array with real paths.
-        const images = [
-            // these are the same SVG data URLs as the thumbnails; replace with "img/gus.jpg", etc.
-            "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='900'><rect fill='%23ffd6e7' width='100%25' height='100%25'/><g fill='%23ff6fa0'><circle cx='360' cy='360' r='260'/><rect x='720' y='540' width='360' height='240' rx='24'/></g><text x='50%25' y='92%25' font-family='Arial' font-size='64' fill='%2399425a' text-anchor='middle'>Gus</text></svg>",
-            "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='900'><rect fill='%23ffd6e7' width='100%25' height='100%25'/><g fill='%23ff8fb6'><rect x='120' y='180' width='480' height='480' rx='60'/><circle cx='840' cy='360' r='240'/></g><text x='50%25' y='92%25' font-family='Arial' font-size='64' fill='%2399425a' text-anchor='middle'>Abby</text></svg>"
-        ];
-
-        const thumbs = document.querySelectorAll('.thumb');
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('modalImg');
-        const closeBtn = document.getElementById('closeBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-
-        let current = 0;
-
-        function openModal(index){
-            current = index;
-            modalImg.src = images[current];
-            modal.classList.add('open');
-            modal.setAttribute('aria-hidden','false');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeModal(){
-            modal.classList.remove('open');
-            modal.setAttribute('aria-hidden','true');
-            document.body.style.overflow = '';
-        }
-        function showNext(delta){
-            current = (current + delta + images.length) % images.length;
-            modalImg.src = images[current];
-        }
-
-        thumbs.forEach((t,i)=> t.addEventListener('click', ()=> openModal(i)));
-        closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e)=> { if(e.target === modal) closeModal(); });
-        prevBtn.addEventListener('click', ()=> showNext(-1));
-        nextBtn.addEventListener('click', ()=> showNext(1));
-
-        // Keyboard support
-        window.addEventListener('keydown', (e)=>{
-            if(modal.classList.contains('open')){
-                if(e.key === 'Escape') closeModal();
-                if(e.key === 'ArrowLeft') showNext(-1);
-                if(e.key === 'ArrowRight') showNext(1);
-            }
-        });
-
-        // --- headline letter split and heart spawn animations ---
-        (function(){
-            const headline = document.getElementById('headline');
-            if(!headline) return;
-            const text = headline.textContent.trim();
-            // clear and rebuild as per-letter spans
-            headline.textContent = '';
-            const frag = document.createDocumentFragment();
-            Array.from(text).forEach((ch, i) => {
-                const span = document.createElement('span');
-                span.className = 'char';
-                span.style.setProperty('--i', i);
-                span.textContent = ch === ' ' ? '\u00A0' : ch;
-                frag.appendChild(span);
-            });
-            // keep the headline wrapper class for styling
-            headline.classList.add('animate-headline');
-            headline.appendChild(frag);
-
-            // spawn some hearts in the header for a playful effect
-            const heartsContainer = document.querySelector('.hearts');
-            if(!heartsContainer) return;
-            const makeHeart = (delayStart = 0) => {
-                const s = document.createElement('span');
-                s.className = 'heart';
-                s.textContent = '❤️';
-                const left = Math.random() * 80 + 10; // 10% - 90%
-                const top = 40 + Math.random() * 40; // start lower in header
-                const size = Math.random() * 18 + 12; // px
-                const dur = (2.5 + Math.random() * 2.8).toFixed(2) + 's';
-                s.style.left = left + '%';
-                s.style.top = top + '%';
-                s.style.fontSize = size + 'px';
-                s.style.animationDuration = dur;
-                s.style.animationDelay = (delayStart || Math.random() * 1.6).toFixed(2) + 's';
-                heartsContainer.appendChild(s);
-                s.addEventListener('animationend', () => s.remove());
-            };
-
-            // initial burst
-            for(let i=0;i<12;i++) makeHeart(i * 0.06);
-            // keep creating a few over time
-            setInterval(() => makeHeart(0), 1300);
-        })();
-    </script>
+  <div class="box">
+    <h1>Test Page</h1>
+    <p>This is a minimal page for testing. Use it to verify layout, animation, or to load resources quickly.</p>
+    <p><a href="Index.html">Back to Index</a></p>
+  </div>
 </body>
 </html>
