@@ -7,13 +7,22 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="container">
+  <div class="container slideshow-page">
     <header>
-      <h1>Slideshow</h1>
+      <h1 class="slideshow-title">Slideshow</h1>
       <div class="dates">A gallery of favorite photos</div>
     </header>
-    <p class="note">Placeholder for a slideshow. Replace with your images from <code>img/</code> and add JS in <code>js/</code>.</p>
+
+    <div class="slideshow-wrap" aria-live="polite">
+      <button class="slideshow-arrow prev" id="prevBtn" aria-label="Previous">&lt;</button>
+      <img id="slideImg" class="slideshow-img" src="" alt="Slideshow image">
+      <button class="slideshow-arrow next" id="nextBtn" aria-label="Next">&gt;</button>
+    </div>
+
+    <p class="note">Use the arrows or Left/Right keys to navigate. Replace the image sources in <code>js/slideshow.js</code> with your files in <code>img/</code>.</p>
     <p><a class="btn" href="index.html">← Back</a></p>
   </div>
+
+  <script src="js/slideshow.js" defer></script>
 </body>
 </html>

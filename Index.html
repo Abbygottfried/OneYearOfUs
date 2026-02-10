@@ -1,50 +1,169 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>One Year of Gus and Abby</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abigail Gottfried Portfolio</title>
+    <style>
+        /* General Body and Layout Styling */
+        body {
+            font-family: 'Arial', Helvetica, sans-serif;
+            background-color: #e997ad ;
+            color: rgb(65, 0, 17);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /*brown:#352c23 green:#516941 LGreen:#6a8a54 Tan: #c0a78d */
+        /* Header Section */
+        header {
+            background-color: #e62e5f;
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: rgb(65, 0, 17);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 0 15px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #e62e5f;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        article a {
+            text-decoration: none;
+            color: rgb(65, 0, 17);
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 0 15px;
+            transition: background-color 0.3s;
+        }
+
+        article a:hover {
+            background-color: #e62e5f;
+            color: #fff;
+            border-radius: 5px;
+        }
+        /* Layout for the main content */
+        main {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Sidebar Image Styling */
+        aside {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        aside img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgb(65, 0, 17);
+        }
+
+        /* Main Section Styling */
+        section {
+            flex: 2;
+            padding: 20px;
+        }
+
+        section header {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        article {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: rgb(65, 0, 17);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 0 15px;
+            transition: background-color 0.3s;
+        }
+
+        footer a:hover {
+            background-color: #e62e5f;
+            color: #fff;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-  <nav class="topbar" aria-label="Primary">
-    <div class="topbar-inner">
-      <a class="nav-btn" href="index.html">Home</a>
-      <a class="nav-btn" href="adventures.html">Adventures</a>
-      <a class="nav-btn" href="stats.html">Stats</a>
-      <a class="nav-btn" href="game.html">Game</a>
-      <a class="nav-btn" href="slideshow.html">Slideshow</a>
-    </div>
-  </nav>
-  <div class="container" role="main">
+
     <header>
-      <h1 id="headline" class="bubble">One Year of Gus and Abby</h1>
-      <div class="dates">April 09 2025 - April 09 2026</div>
+        One year of Gus and Abby
     </header>
 
-    <div class="intro-row">
-      <div>
-        <p class="note">A small collection of memories, stats, and fun — click the buttons to explore.</p>
-        <div class="cta" style="margin-top:12px">
-          <a class="btn" href="adventures.html" title="Our adventures page">🌍 Adventures</a>
-          <a class="btn" href="stats.html" title="Our stats page">📊 Our Stats</a>
-          <a class="btn" href="game.html" title="A little game">🎮 Game</a>
-          <a class="btn" href="slideshow.html" title="Slideshow of pics">📸 Slideshow</a>
-        </div>
-      </div>
+    <nav>
+        <a href="/index.html">Home</a>
+        <a href="/adventures.html">Our Adventures</a>
+        <a href="/game.html">Game</a>
+        <a href="/slideshow.html">Slide Show</a>
+    </nav>
 
-      <div>
-        <div class="photos" aria-hidden="false">
-          <img class="thumb" src="img/gus-placeholder.jpg" alt="Gus placeholder" data-index="0">
-          <img class="thumb" src="img/abby-placeholder.jpg" alt="Abby placeholder" data-index="1">
-        </div>
-      </div>
-    </div>
+    <main>
+        <!-- Sidebar for the Image -->
+        <aside>
+            <img src="/img/Abigail.png" alt="PicOfUs">
+        </aside>
 
-    <p class="note">Tip: add your photos to the <code>img/</code> folder and update the image filenames used above.</p>
-  </div>
+        <!-- Main Content Section -->
+        <section>
+            <header>Happy One Year</header>
+            <article>
+              happy one year to the loml bLLAAAHHHHH BLAH BLAH
+            </br>
+            </article>  
+        </section>
+     
+    </main>
+    <footer>
+        <p> April 09 | Gus and Abby | 2025 - 2026 </p>
+    </footer>
 
-  <script src="js/app.js" defer></script>
 </body>
 </html>
