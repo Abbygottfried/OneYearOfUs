@@ -65,4 +65,145 @@ h1{margin:8px 0;font-size:44px;letter-spacing:1px;line-height:1}
   .slideshow-arrow{width:44px;height:44px;font-size:20px}
   .slideshow-arrow.prev{left:6px}
   .slideshow-arrow.next{right:6px}
+  
+        /* General Body and Layout Styling */
+        body {
+            font-family: 'Arial', Helvetica, sans-serif;
+            background-color: #fbceda ;
+            color: rgb(65, 0, 17);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /*brown:#352c23 green:#516941 LGreen:#6a8a54 Tan: #c0a78d */
+        /* Header Section */
+        header {
+            background-color: #fbceda;
+            color: rgb(144, 1, 1);
+            padding: 25px 0;
+            text-align: center;
+            font-size: 5em;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: rgb(65, 0, 17);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 0 15px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #e62e5f;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        article a {
+            text-decoration: none;
+            color: rgb(65, 0, 17);
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 0 15px;
+            transition: background-color 0.3s;
+        }
+
+        article a:hover {
+            background-color: #e62e5f;
+            color: #fff;
+            border-radius: 5px;
+        }
+        /* Layout for the main content */
+        main {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Sidebar Image Styling */
+        aside {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        aside img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgb(65, 0, 17);
+        }
+         header img {
+            width: 100%;
+            max-width: 100px;
+            height: auto;
+        }
+        /* Main Section Styling */
+        section {
+            flex: 2;
+            padding: 20px;
+        }
+
+        section header {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        article {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: rgb(65, 0, 17);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 0 15px;
+            transition: background-color 0.3s;
+        }
+
+        footer a:hover {
+            background-color: #e62e5f;
+            color: #fff;
+            border-radius: 5px;
+        }
+    /* Heart hero styles */
+    .heart-hero{display:flex;align-items:center;justify-content:center;padding:28px 12px}
+    .heart-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+    .day-label{font-size:18px;text-transform:lowercase;color:rgb(65,0,17);font-weight:700}
+    .heart-box{position:relative;display:flex;align-items:center;justify-content:center}
+    .heart{width:160px;height:auto;filter:drop-shadow(0 8px 20px rgba(232,59,80,0.18));transform-origin:center center;animation:pulse 1.6s ease-in-out infinite}
+    .day-count{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:36px;font-weight:800;color:white;letter-spacing:1px;text-shadow:0 4px 12px rgba(0,0,0,0.5)}
+    @keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.12)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){.heart{animation:none}}
+    
+    
 }
