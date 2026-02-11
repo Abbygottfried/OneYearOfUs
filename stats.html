@@ -140,7 +140,21 @@
             background-color: #e62e5f;
             color: #fff;
             border-radius: 5px;
+        }  /* Stardew Valley font (place StardedValley.ttf in /fonts/) */
+        @font-face{
+            font-family: 'StardewValley';
+            src: url('fonts/StardewValley.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
         }
+
+        /* SDV banner (overlay text on TextSDV.png) */
+        .sdv-banner{display:flex;align-items:center;justify-content:center;padding:20px}
+        .sdv-wrap{position:relative;max-width:680px;width:100%}
+        .sdv-wrap img{display:block;width:100%;height:auto}
+        .sdv-text{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'StardewValley', 'Fredoka One', cursive;font-size:46px;color:#fff;text-align:center;pointer-events:none;text-shadow:0 4px 12px rgba(0,0,0,0.6)}
+        @media (max-width:640px){.sdv-text{font-size:28px}}
           /* Heart hero styles */
     .heart-hero{display:flex;align-items:center;justify-content:center;padding:28px 12px}
     .heart-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
@@ -182,6 +196,15 @@
                 <div class="day-count" id="dayCount">0</div>
             </div>
         </div>
+        <br>
+            <!-- SDV banner: overlay text on TextSDV.png (requires fonts/StardewValley.ttf to be present) -->
+    <section class="sdv-banner" aria-label="SDV banner">
+        <div class="sdv-wrap">
+            <img src="img/TextSDV.png" alt="SDV background">
+            <div class="sdv-text" id="sdvText">One Year Together</div>
+        </div>
+    </section>
+
           <article>
                 <img src="img/TextSDV.png" alt="SDVtextbox">
             </article> 

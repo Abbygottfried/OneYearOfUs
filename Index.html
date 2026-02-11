@@ -134,15 +134,14 @@
             color: #fff;
             border-radius: 5px;
         }
-    /* Heart hero styles */
-    .heart-hero{display:flex;align-items:center;justify-content:center;padding:28px 12px}
-    .heart-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
-    .day-label{font-size:18px;text-transform:lowercase;color:rgb(65,0,17);font-weight:700}
-    .heart-box{position:relative;display:flex;align-items:center;justify-content:center}
-    .heart{width:160px;height:auto;filter:drop-shadow(0 8px 20px rgba(232,59,80,0.18));transform-origin:center center;animation:pulse 1.6s ease-in-out infinite}
-    .day-count{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:36px;font-weight:800;color:white;letter-spacing:1px;text-shadow:0 4px 12px rgba(0,0,0,0.5)}
-    @keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.12)}100%{transform:scale(1)}}
-    @media (prefers-reduced-motion:reduce){.heart{animation:none}}
+        /* Stardew Valley font (place StardedValley.ttf in /fonts/) */
+        @font-face{
+            font-family: 'StardewValley';
+            src: url('fonts/StardewValley.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
     </style>
 </head>
 <body>
@@ -160,7 +159,6 @@
         <a href="stats.html">Stats</a>
         <a href="LoveLetter.html">Love Letter</a>
     </nav>
-
 
     <main>
         <!-- Sidebar for the Image -->
