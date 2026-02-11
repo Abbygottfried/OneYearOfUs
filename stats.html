@@ -180,6 +180,22 @@
     <footer>
         <p> April 09 | Gus and Abby | 2025 - 2026 </p>
     </footer>
-
+ <script>
+        // days-since counter (since 2025-04-09)
+        (function(){
+            const start = new Date(Date.UTC(2025,3,9)); // months are 0-indexed; April = 3
+            const el = document.getElementById('dayCount');
+            if(!el) return;
+            function update(){
+                const now = new Date();
+                // calculate difference in full days
+                const diff = Math.floor((now - start) / (1000*60*60*24));
+                el.textContent = diff >= 0 ? diff : 0;
+            }
+            update();
+            // refresh once per minute in case page stays open across midnight
+            setInterval(update, 60*1000);
+        })();
+    </script>
 </body>
 </html>

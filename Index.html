@@ -161,20 +161,6 @@
         <a href="LoveLetter.html">Love Letter</a>
     </nav>
 
-    <!-- Heart counter hero (days since 2025-04-09) -->
-    <section class="heart-hero" aria-label="Days since we became us">
-        <div class="heart-wrap">
-            <div class="day-label">days since me became we</div>
-            <div class="heart-box">
-                <!-- simple SVG heart; fill is red and background is transparent -->
-                <svg class="heart" viewBox="0 0 32 29.6" aria-hidden="true" focusable="false">
-                    <path d="M23.6,0c-2.9,0-5.4,1.6-6.6,4C15.8,1.6,13.3,0,10.4,0C4.6,0,0,4.9,0,10.9C0,20.1,9.5,24.9,16,29.6
-                    c6.5-4.7,16-9.5,16-18.7C32,4.9,27.4,0,23.6,0z" fill="#e83b50"/>
-                </svg>
-                <div class="day-count" id="dayCount">0</div>
-            </div>
-        </div>
-    </section>
 
     <main>
         <!-- Sidebar for the Image -->
@@ -199,23 +185,6 @@
         <p> April 09 | Gus and Abby | 2025 - 2026 </p>
     </footer>
 
-    <script>
-        // days-since counter (since 2025-04-09)
-        (function(){
-            const start = new Date(Date.UTC(2025,3,9)); // months are 0-indexed; April = 3
-            const el = document.getElementById('dayCount');
-            if(!el) return;
-            function update(){
-                const now = new Date();
-                // calculate difference in full days
-                const diff = Math.floor((now - start) / (1000*60*60*24));
-                el.textContent = diff >= 0 ? diff : 0;
-            }
-            update();
-            // refresh once per minute in case page stays open across midnight
-            setInterval(update, 60*1000);
-        })();
-    </script>
 
 </body>
 </html>
