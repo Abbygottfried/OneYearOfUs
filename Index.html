@@ -134,14 +134,15 @@
             color: #fff;
             border-radius: 5px;
         }
-        /* Heart hero styles */
-        .heart-hero{display:flex;align-items:center;justify-content:center;padding:28px 12px}
-        .heart-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
-        .heart{width:140px;height:auto;filter:drop-shadow(0 8px 20px rgba(232,59,80,0.18));transform-origin:center center;animation:pulse 1.6s ease-in-out infinite}
-        .day-count{font-size:48px;font-weight:800;color:rgb(65,0,17);letter-spacing:1px}
-        .day-label{text-transform:lowercase;color:rgb(65,0,17);font-weight:700}
-        @keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.12)}100%{transform:scale(1)}}
-        @media (prefers-reduced-motion:reduce){.heart{animation:none}}
+    /* Heart hero styles */
+    .heart-hero{display:flex;align-items:center;justify-content:center;padding:28px 12px}
+    .heart-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+    .day-label{font-size:18px;text-transform:lowercase;color:rgb(65,0,17);font-weight:700}
+    .heart-box{position:relative;display:flex;align-items:center;justify-content:center}
+    .heart{width:160px;height:auto;filter:drop-shadow(0 8px 20px rgba(232,59,80,0.18));transform-origin:center center;animation:pulse 1.6s ease-in-out infinite}
+    .day-count{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:36px;font-weight:800;color:white;letter-spacing:1px;text-shadow:0 4px 12px rgba(0,0,0,0.5)}
+    @keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.12)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){.heart{animation:none}}
     </style>
 </head>
 <body>
@@ -163,14 +164,15 @@
     <!-- Heart counter hero (days since 2025-04-09) -->
     <section class="heart-hero" aria-label="Days since we became us">
         <div class="heart-wrap">
-            <!-- simple SVG heart; fill is red and background is transparent -->
-            <svg class="heart" viewBox="0 0 32 29.6" aria-hidden="true" focusable="false">
-                <path d="M23.6,0c-2.9,0-5.4,1.6-6.6,4C15.8,1.6,13.3,0,10.4,0C4.6,0,0,4.9,0,10.9C0,20.1,9.5,24.9,16,29.6
-                c6.5-4.7,16-9.5,16-18.7C32,4.9,27.4,0,23.6,0z" fill="#e83b50"/>
-            </svg>
-
-            <div class="day-count" id="dayCount">0</div>
             <div class="day-label">days since me became we</div>
+            <div class="heart-box">
+                <!-- simple SVG heart; fill is red and background is transparent -->
+                <svg class="heart" viewBox="0 0 32 29.6" aria-hidden="true" focusable="false">
+                    <path d="M23.6,0c-2.9,0-5.4,1.6-6.6,4C15.8,1.6,13.3,0,10.4,0C4.6,0,0,4.9,0,10.9C0,20.1,9.5,24.9,16,29.6
+                    c6.5-4.7,16-9.5,16-18.7C32,4.9,27.4,0,23.6,0z" fill="#e83b50"/>
+                </svg>
+                <div class="day-count" id="dayCount">0</div>
+            </div>
         </div>
     </section>
 
