@@ -142,6 +142,21 @@
             font-style: normal;
             font-display: swap;
         }
+        /* Heart hero and SDV banner styles */
+        .heart-hero{display:flex;align-items:center;justify-content:center;padding:28px 12px;background:transparent}
+        .heart-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+        .day-label{font-size:18px;text-transform:lowercase;color:rgb(65,0,17);font-weight:700}
+        .heart-box{position:relative;display:flex;align-items:center;justify-content:center}
+        .heart{width:160px;height:auto;filter:drop-shadow(0 8px 20px rgba(232,59,80,0.18));transform-origin:center center;animation:pulse 1.6s ease-in-out infinite}
+        .day-count{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:36px;font-weight:800;color:white;letter-spacing:1px;text-shadow:0 4px 12px rgba(0,0,0,0.5)}
+        @keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.12)}100%{transform:scale(1)}}
+        @media (prefers-reduced-motion:reduce){.heart{animation:none}}
+
+        .sdv-banner{display:flex;align-items:center;justify-content:center;padding:18px 12px}
+        .sdv-wrap{position:relative;max-width:680px;width:100%}
+        .sdv-wrap img{display:block;width:100%;height:auto}
+        .sdv-text{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'StardewValley','Fredoka One',cursive;font-size:46px;color:#fff;text-align:center;pointer-events:none;text-shadow:0 4px 12px rgba(0,0,0,0.6)}
+        @media (max-width:640px){.sdv-text{font-size:28px}}
     </style>
 </head>
 <body>
@@ -159,6 +174,28 @@
         <a href="stats.html">Stats</a>
         <a href="LoveLetter.html">Love Letter</a>
     </nav>
+
+    <!-- Heart counter hero (days since 2025-04-09) -->
+    <section class="heart-hero" aria-label="Days since we became us">
+        <div class="heart-wrap">
+            <div class="day-label">days since me became we</div>
+            <div class="heart-box">
+                <svg class="heart" viewBox="0 0 32 29.6" aria-hidden="true" focusable="false">
+                    <path d="M23.6,0c-2.9,0-5.4,1.6-6.6,4C15.8,1.6,13.3,0,10.4,0C4.6,0,0,4.9,0,10.9C0,20.1,9.5,24.9,16,29.6
+                    c6.5-4.7,16-9.5,16-18.7C32,4.9,27.4,0,23.6,0z" fill="#e83b50"/>
+                </svg>
+                <div class="day-count" id="dayCount">0</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SDV banner: overlay text on TextSDV.png (requires fonts/StardewValley.ttf to be present) -->
+    <section class="sdv-banner" aria-label="SDV banner">
+        <div class="sdv-wrap">
+            <img src="img/TextSDV.png" alt="SDV background">
+            <div class="sdv-text" id="sdvText">One Year Together</div>
+        </div>
+    </section>
 
     <main>
         <!-- Sidebar for the Image -->
@@ -182,7 +219,24 @@
     <footer>
         <p> April 09 | Gus and Abby | 2025 - 2026 </p>
     </footer>
+</body>
+</html>
 
+    <script>
+        // days-since counter (since 2025-04-09)
+        (function(){
+            const start = new Date(2025,3,9); // local date: April 9, 2025
+            const el = document.getElementById('dayCount');
+            if(!el) return;
+            function update(){
+                const now = new Date();
+                const diff = Math.floor((now - start) / (1000*60*60*24));
+                el.textContent = diff >= 0 ? diff : 0;
+            }
+            update();
+            setInterval(update, 60*1000);
+        })();
+    </script>
 
 </body>
 </html>
