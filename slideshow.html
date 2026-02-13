@@ -155,6 +155,16 @@
   display: none;
 }
 
+/* Force slides to have a fixed height and auto width (overrides inline width) */
+.mySlides img {
+  width: auto !important;
+  height: 480px; /* set the exact height you want */
+  max-height: 70vh; /* responsive cap */
+  object-fit: cover; /* crop if needed while preserving aspect */
+  display: block;
+  margin: 0 auto;
+}
+
 /* Next & previous buttons */
 /* style for prev/next when shown above the image in a top bar */
 .prev, .next {
@@ -171,9 +181,7 @@
 }
 
 /* Position the "next button" to the right */
-.next {
-  /* no absolute positioning here; the .arrow-top container handles placement */
-}
+
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover { background-color: rgba(0,0,0,0.85); transform:scale(1.03); }

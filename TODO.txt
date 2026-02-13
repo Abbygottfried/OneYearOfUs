@@ -1,0 +1,7 @@
+add in the letter animation 
+make game
+put slideshow buttons on top of the picture
+animate the home page
+add more stats
+figure out how to formate adventure page
+    
