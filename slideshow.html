@@ -156,31 +156,27 @@
 }
 
 /* Next & previous buttons */
+/* style for prev/next when shown above the image in a top bar */
 .prev, .next {
   cursor: pointer;
-  position: absolute;
-  top: 50%;
   width: auto;
-  margin-top: -22px;
-  padding: 16px;
+  padding: 10px 14px;
   color: white;
   font-weight: bold;
   font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
+  transition: 0.3s ease;
+  border-radius: 8px;
   user-select: none;
+  background: rgba(0,0,0,0.6);
 }
 
 /* Position the "next button" to the right */
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+  /* no absolute positioning here; the .arrow-top container handles placement */
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
+.prev:hover, .next:hover { background-color: rgba(0,0,0,0.85); transform:scale(1.03); }
 
 /* Caption text */
 .text {
@@ -228,6 +224,11 @@
   from {opacity: .4}
   to {opacity: 1}
 }
+
+/* top arrow container */
+.arrow-top{position:absolute;left:50%;top:-46px;transform:translateX(-50%);display:flex;gap:10px;z-index:20}
+.slideshow-container{padding-top:56px}
+
     </style>
 </head>
 <body>
@@ -310,13 +311,13 @@
   <div class="mySlides fade">
     <div class="numbertext">9 / 14</div>
     <img src="img/brewerus.jpg" style="width:100%">
-    <div class="text">the brewers game</div>
+    <div class="text"></div>
   </div>
 
     <div class="mySlides fade">
     <div class="numbertext">10 / 14</div>
     <img src="img/afterfish.jpg" style="width:100%">
-    <div class="text">fishing (very tired)</div>
+    <div class="text">post fishing (very tired)</div>
   </div>
   
     <div class="mySlides fade">
@@ -342,9 +343,11 @@
     <img src="img/sisgrad.jpg" style="width:100%">
     <div class="text">your sisters grad party</div>
   </div>
-  <!-- Next and previous buttons -->
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  <!-- Top arrows container (buttons placed above the image, next to each other) -->
+  <div class="arrow-top">
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
 </div>
 <br>
 
