@@ -66,9 +66,50 @@
         main {
             display: flex;
             justify-content: space-between;
+            /* keep the content 15px from the left/right edges */
+            margin: 0 15px;
+            padding: 20px 0;
+            gap: 20px;
+            max-width: none; /* allow full width while keeping 15px page margins */
+            box-sizing: border-box;
+            flex-wrap: wrap;
+        }
+           /* Work Item Styling */
+        .work-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 0 10px 20px;
             padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            /* allow flex items to sit next to each other and shrink on small screens */
+            flex: 1 1 260px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .work-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .work-item img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+        }
+
+        .work-item h3 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .work-item p {
+            font-size: 1.1em;
+            color: #555;
         }
 
         /* Sidebar Image Styling */
@@ -134,6 +175,27 @@
             color: #fff;
             border-radius: 5px;
         }
+        
+        nav a:hover {
+            background-color: #578955;
+            color: #fff;
+            border-radius: 5px;
+        }
+        div a {
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 0 15px;
+            transition: background-color 0.3s;
+        }
+
+         div a:hover {
+            background-color: #578955;
+            color: #fff;
+            border-radius: 5px;
+        }
+        
 
     </style>
 </head>
@@ -154,15 +216,50 @@
         <a href="LoveLetter.html">Love Letter</a>
     </nav>
 
+    <main>
+     <div class="work-item">
+            <img src="/img/wedding.jpg" alt="pic from Kenny's wedding">
+            <h3>Life Events </h3>
+            <p>Gus' ankle is fully fused</p>
+            <p>Kara Graduated HS</p>
+            <p>Kenny and Lidia got Married</p>
+            <p>Gus turned 23</p>
+            <p>Gus graduated College</p>
+            <p>Gus is a Teacher </p>
+            <p>Gus Got an Apartment</p>
+             <p>Abby Turned 21</p>
+            <p>Abby is a RA</p>
+    </div>
+   <div class="work-item">
+            <img src="/img/devilLake.jpg" alt="Pic at Devils Lake">
+            <h3>Places We've Been</h3>
+            <p>The Bottoms</p>
+            <p>Action City</p>
+            <p>Devils Lake</p>
+            <p>Gus' Parents cabin</p>
+            <p>Eau Claire Car show</p>
+            <p>Brewers Game</p>
+            <p>LRR Robotics Comp</p>
+            <p>Ikea </p>
+            <p>Oshkosh Trip</p>
+            <p>Sausage Fest</p>
+    </div>
+    <div class="work-item">
+            <img src="/img/HotPCarS.jpg" alt="Pic at Hot Pot">
+            <h3>Places We've Eaten</h3>
+            <p>Texas Roadhouse</p>
+            <p>Cracker Barrel</p>
+            <p>Organ Piper Pizza</p>
+            <p>El Sol</p>
+            <p>Cancun Mexican Grill</p>
+            <p>Antigua Real</p>
+            <p>Hot Pot</p>
+    </div>
+
+
     </main>
     <footer>
         <p> April 09 | Gus and Abby | 2025 - 2026 </p>
     </footer>
-</body>
-</html>
-
-    <script>
-    </script>
-
 </body>
 </html>

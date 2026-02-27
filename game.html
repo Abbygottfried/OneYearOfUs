@@ -13,6 +13,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        
+        
+      
+
         }
         /*brown:#352c23 green:#516941 LGreen:#6a8a54 Tan: #c0a78d */
         /* Header Section */
@@ -135,6 +139,77 @@
             border-radius: 5px;
         }
 
+    div{
+        display: block;
+        margin: 0 auto;
+        align-items: center;
+    }
+        #gameContainer {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        margin: 40px auto;
+        border: 3px solid black;
+        background: white;
+        overflow: hidden;
+        }
+
+        #startScreen, #gameOverScreen {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.4);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+        }
+
+        #startScreen img {
+        width: 180px;
+        margin-bottom: 20px;
+        }
+
+        #playBtn, #restartBtn {
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        }
+
+        #gameOverScreen {
+        display: none;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        text-align: center;
+        padding: 20px;
+        }
+
+        #scorePanel {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 5;
+        display: flex;
+        gap: 15px;
+        background: rgba(255,255,255,0.7);
+        padding: 4px 8px;
+        border-radius: 6px;
+        }
+
+        .shake {
+        animation: shake 0.3s;
+        }
+
+        @keyframes shake {
+        0% { transform: translate(0px, 0px); }
+        25% { transform: translate(-4px, 2px); }
+        50% { transform: translate(4px, -2px); }
+        75% { transform: translate(-3px, 3px); }
+        100% { transform: translate(0px, 0px); }
+        }
     </style>
 </head>
 <body>
@@ -153,14 +228,266 @@
         <a href="LoveLetter.html">Love Letter</a>
     </nav>
 
-    </main>
+        <div id="gameContainer">
+        <div id="startScreen">
+            <img src="img/heart.png" alt="Start Image">
+            <button id="playBtn">Play</button>
+        </div>
+
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+        <div id="scorePanel">
+            <span>Score: <span id="score">0</span></span>
+            <span>Best: <span id="highScore">0</span></span>
+        </div>
+
+        <div id="gameOverScreen">
+            <h2>You crashed… but I’d still ride with you ❤️</h2>
+            <p>Score: <span id="finalScore">0</span></p>
+            <p>Best: <span id="finalHighScore">0</span></p>
+            <button id="restartBtn">Restart</button>
+        </div>
+        </div>
+   
     <footer>
         <p> April 09 | Gus and Abby | 2025 - 2026 </p>
-    </footer>
-</body>
-</html>
+  </footer>
 
     <script>
+                const canvas = document.getElementById("gameCanvas");
+            const ctx = canvas.getContext("2d");
+
+            // Images
+            const birdImg = new Image();
+            birdImg.src = "img/car.png";
+
+            const bgImg = new Image();
+            bgImg.src = "img/road.png";
+
+            const carImg = new Image();
+            carImg.src = "img/car2.png";
+
+            // Player
+            let bird = { x: 60, y: 200, width: 40, height: 40, velocity: 0 };
+            let gravity = 0.35;
+            let jump = -6;
+
+            // Cars
+            let cars = [];
+            let carWidth = 60;
+            let carHeight = 40;
+            let spawnCooldown = 0;
+            let minVerticalSpacing = 80;
+
+            // Background scroll
+            let bgX = 0;
+            let bgSpeed = 2;
+
+            // Hearts
+            let hearts = [];
+
+            // Game state
+            let score = 0;
+            let highScore = parseInt(localStorage.getItem("carGameHighScore") || "0");
+            let frame = 0;
+            let gameRunning = false;
+            let slowMoFrames = 0;
+
+            // UI
+            const scoreEl = document.getElementById("score");
+            const highScoreEl = document.getElementById("highScore");
+            const finalScoreEl = document.getElementById("finalScore");
+            const finalHighScoreEl = document.getElementById("finalHighScore");
+            const container = document.getElementById("gameContainer");
+
+            highScoreEl.textContent = highScore;
+
+            // Buttons
+            document.getElementById("playBtn").onclick = startGame;
+            document.getElementById("restartBtn").onclick = restartGame;
+
+            document.addEventListener("keydown", (e) => {
+            if (e.code === "Space" || e.code === "ArrowUp") {
+                if (gameRunning) bird.velocity = jump;
+                else startGame();
+            }
+            });
+
+            function startGame() {
+            document.getElementById("startScreen").style.display = "none";
+            document.getElementById("gameOverScreen").style.display = "none";
+            gameRunning = true;
+            resetGame();
+            loop();
+            }
+
+            function restartGame() {
+            document.getElementById("gameOverScreen").style.display = "none";
+            gameRunning = true;
+            resetGame();
+            loop();
+            }
+
+            function resetGame() {
+            bird.y = 200;
+            bird.velocity = 0;
+            cars = [];
+            hearts = [];
+            score = 0;
+            frame = 0;
+            spawnCooldown = 0;
+            bgX = 0;
+            slowMoFrames = 0;
+            scoreEl.textContent = score;
+            highScoreEl.textContent = highScore;
+            container.classList.remove("shake");
+            }
+
+            function loop() {
+            if (!gameRunning) return;
+
+            frame++;
+
+            // Slow-mo effect after crash trigger
+            const speedFactor = slowMoFrames > 0 ? 0.4 : 1;
+            if (slowMoFrames > 0) slowMoFrames--;
+
+            // Bird physics
+            bird.velocity += gravity * speedFactor;
+            bird.y += bird.velocity * speedFactor;
+
+            // Bounds
+            if (bird.y < 0) bird.y = 0;
+            if (bird.y + bird.height > canvas.height) {
+                triggerCrash();
+                return;
+            }
+
+            // Spawn cars
+            spawnCooldown -= 1 * speedFactor;
+
+            if (spawnCooldown <= 0) {
+                let y;
+                if (cars.length === 0) {
+                y = Math.random() * (canvas.height - carHeight);
+                } else {
+                let lastY = cars[cars.length - 1].y;
+                let minY = Math.max(0, lastY - (carHeight + minVerticalSpacing));
+                let maxY = Math.min(canvas.height - carHeight, lastY + (carHeight + minVerticalSpacing));
+                y = Math.random() * (maxY - minY) + minY;
+                }
+
+                // Rare fast car (A3): +3 points if dodged
+                const isFast = Math.random() < 0.12; // ~12% chance
+                cars.push({
+                x: canvas.width,
+                y: y,
+                speed: isFast ? 5 : 3,
+                scored: false,
+                fast: isFast
+                });
+
+                spawnCooldown = Math.floor(Math.random() * 40) + 60; // 60–100 frames
+            }
+
+            // Move cars
+            cars.forEach(c => c.x -= c.speed * speedFactor);
+            cars = cars.filter(c => c.x + carWidth > 0);
+
+            // Collision
+            for (let c of cars) {
+                if (
+                bird.x < c.x + carWidth &&
+                bird.x + bird.width > c.x &&
+                bird.y < c.y + carHeight &&
+                bird.y + bird.height > c.y
+                ) {
+                triggerCrash();
+                return;
+                }
+            }
+
+            // Score
+            cars.forEach(c => {
+                if (!c.scored && c.x + carWidth < bird.x) {
+                c.scored = true;
+                score += c.fast ? 3 : 1;
+                }
+            });
+
+            scoreEl.textContent = score;
+
+            // Background scroll
+            bgX -= bgSpeed * speedFactor;
+            if (bgX <= -canvas.width) bgX = 0;
+
+            // Hearts
+            if (frame % 5 === 0) {
+                hearts.push({
+                x: bird.x,
+                y: bird.y + bird.height / 2,
+                size: 6,
+                alpha: 1
+                });
+            }
+
+            hearts.forEach(h => {
+                h.x -= 2 * speedFactor;
+                h.alpha -= 0.02 * speedFactor;
+            });
+            hearts = hearts.filter(h => h.alpha > 0);
+
+            draw();
+            requestAnimationFrame(loop);
+            }
+
+            function triggerCrash() {
+            // Slow-mo + shake, then endGame after a short delay
+            slowMoFrames = 20;
+            container.classList.add("shake");
+            setTimeout(() => {
+                endGame();
+            }, 250);
+            }
+
+            function endGame() {
+            gameRunning = false;
+            container.classList.remove("shake");
+
+            // Update high score
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem("carGameHighScore", highScore.toString());
+            }
+
+            finalScoreEl.textContent = score;
+            finalHighScoreEl.textContent = highScore;
+            highScoreEl.textContent = highScore;
+
+            document.getElementById("gameOverScreen").style.display = "flex";
+            }
+
+            function draw() {
+            // Background scroll
+            ctx.drawImage(bgImg, bgX, 0, canvas.width, canvas.height);
+            ctx.drawImage(bgImg, bgX + canvas.width, 0, canvas.width, canvas.height);
+
+            // Hearts
+            hearts.forEach(h => {
+                ctx.fillStyle = `rgba(255,0,100,${h.alpha})`;
+                ctx.beginPath();
+                ctx.arc(h.x, h.y, h.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Player
+            ctx.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+
+            // Cars
+            cars.forEach(c => {
+                ctx.drawImage(carImg, c.x, c.y, carWidth, carHeight);
+            });
+            }
     </script>
 
 </body>
