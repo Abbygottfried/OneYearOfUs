@@ -154,22 +154,31 @@
         overflow: hidden;
         }
 
-        #startScreen, #gameOverScreen {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.4);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 10;
-        }
+    #startScreen, #gameOverScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* ensure overlay is above the canvas */
+    }
 
         #startScreen img {
         width: 180px;
         margin-bottom: 20px;
         }
+
+                /* ensure canvas sits below overlays */
+                #gameCanvas {
+                    position: relative;
+                    z-index: 0;
+                    display: block;
+                }
 
         #playBtn, #restartBtn {
         padding: 10px 20px;
@@ -242,7 +251,7 @@
         </div>
 
         <div id="gameOverScreen">
-            <h2>You crashed… but I’d still ride with you ❤️</h2>
+            <h2>You crashed… </h2>
             <p>Score: <span id="finalScore">0</span></p>
             <p>Best: <span id="finalHighScore">0</span></p>
             <button id="restartBtn">Restart</button>
@@ -285,13 +294,11 @@
 
             // Hearts
             let hearts = [];
-
             // Game state
             let score = 0;
-            let highScore = parseInt(localStorage.getItem("carGameHighScore") || "0");
-            let frame = 0;
-            let gameRunning = false;
             let slowMoFrames = 0;
+            // high score from storage
+            let highScore = parseInt(localStorage.getItem("carGameHighScore")) || 0;
 
             // UI
             const scoreEl = document.getElementById("score");
