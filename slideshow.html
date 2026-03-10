@@ -143,20 +143,22 @@
         }  /* Stardew Valley font (place StardedValley.ttf in /fonts/) */
         * {box-sizing:border-box}
 
-/* Slideshow container */
+/* Slideshow layout: two slideshows split the screen */
+.slides-wrapper { display: flex; gap: 12px; align-items: flex-start; }
 .slideshow-container {
-  max-height: 500;
+  flex: 1 1 0;
   position: relative;
   margin: auto;
+  max-width: none;
 }
 
 /* Hide the images by default */
-.mySlides {
+.mySlides, .mySlides1, .mySlides2 {
   display: none;
 }
 
 /* Force slides to have a fixed height and auto width (overrides inline width) */
-.mySlides img {
+.mySlides img, .mySlides1 img, .mySlides2 img {
   width: auto !important;
   height: 480px; /* set the exact height you want */
   max-height: 70vh; /* responsive cap */
@@ -254,153 +256,186 @@
         <a href="Index.html">Home</a>
         <a href="LoveLetter.html">Love Letter</a>
     </nav>
-    <!-- Slideshow container -->
-<div class="slideshow-container">
+  <!-- Slideshow container -->
 
-  <!-- Full-width images with number and caption text -->
-  <div class="mySlides fade">
-    <div class="numbertext">1 / 14</div>
-    <img src="img/portchHug.jpg" style="width:100%">
-    <div class="text"></div>
+<!-- Two slideshows side-by-side -->
+<div class="slides-wrapper">
+  <div class="slideshow-container" id="slideshow1">
+    <!-- Full-width images with number and caption text (left) -->
+    <div class="mySlides1 fade">
+      <div class="numbertext">1 / 7</div>
+      <img src="img/portchHug.jpg" style="width:100%">
+      <div class="text"></div>
+    </div>
+
+    <div class="mySlides1 fade">
+      <div class="numbertext">2 / 7</div>
+      <img src="img/porchpic.jpg" style="width:100%">
+      <div class="text"></div>
+    </div>
+
+    <div class="mySlides1 fade">
+      <div class="numbertext">3 / 7</div>
+      <img src="img/memoving.jpg" style="width:100%">
+      <div class="text">moving me in</div>
+    </div>
+
+    <div class="mySlides1 fade">
+      <div class="numbertext">4 / 7</div>
+      <img src="img/me21.jpg" style="width:100%">
+      <div class="text">my 21st</div>
+    </div>
+
+    <div class="mySlides1 fade">
+      <div class="numbertext">5 / 7</div>
+      <img src="img/gokart.jpg" style="width:100%">
+      <div class="text">Go Kartinggg</div>
+    </div>
+
+    <div class="mySlides1 fade">
+      <div class="numbertext">6 / 7</div>
+      <img src="img/fridge.jpg" style="width:100%">
+      <div class="text">whats in the fridge?</div>
+    </div>
+
+    <div class="mySlides1 fade">
+      <div class="numbertext">7 / 7</div>
+      <img src="img/Fishing.jpg" style="width:100%">
+      <div class="text">Fishing</div>
+    </div>
+
+    <div class="arrow-top">
+      <a class="prev" onclick="plusSlides1(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides1(1)">&#10095;</a>
+    </div>
   </div>
 
-  <div class="mySlides fade">
-    <div class="numbertext">2 / 14</div>
-    <img src="img/porchpic.jpg" style="width:100%">
-    <div class="text"></div>
-  </div>
 
-  <div class="mySlides fade">
-    <div class="numbertext">3 / 14</div>
-    <img src="img/memoving.jpg" style="width:100%">
-    <div class="text">moving me in</div>
-  </div>
-  
-  <div class="mySlides fade">
-    <div class="numbertext">4 / 14</div>
-    <img src="img/me21.jpg" style="width:100%">
-    <div class="text">my 21st</div>
-  </div>
 
-  
-  <div class="mySlides fade">
-    <div class="numbertext">5 / 14</div>
-    <img src="img/gokart.jpg" style="width:100%">
-    <div class="text">Go Kartinggg</div>
-  </div>
 
-  
-  <div class="mySlides fade">
-    <div class="numbertext">6 / 14</div>
-    <img src="img/fridge.jpg" style="width:100%">
-    <div class="text">whats in the fridge?</div>
-  </div>
 
-  
-  <div class="mySlides fade">
-    <div class="numbertext">7 / 14</div>
-    <img src="img/Fishing.jpg" style="width:100%">
-    <div class="text">Fishing</div>
-  </div>
-
-    <div class="mySlides fade">
-    <div class="numbertext">7 / 14</div>
-    <img src="img/HotPCarS.jpg" style="width:100%">
-    <div class="text">Hot Pot and Car Show </div>
-  </div>
-  
-  <div class="mySlides fade">
-    <div class="numbertext">8 / 14</div>
-    <img src="img/cuteaggression.jpg" style="width:100%">
-    <div class="text">Cutness aggression</div>
-  </div>
 
   
-  <div class="mySlides fade">
-    <div class="numbertext">9 / 14</div>
-    <img src="img/brewerus.jpg" style="width:100%">
-    <div class="text"></div>
-  </div>
+  <div class="slideshow-container" id="slideshow2">
+    <!-- Right slideshow -->
+    <div class="mySlides2 fade">
+      
+      <img src="img/card1.jpg" style="width:100%">
+   
+    </div>
 
-    <div class="mySlides fade">
-    <div class="numbertext">10 / 14</div>
-    <img src="img/afterfish.jpg" style="width:100%">
-    <div class="text">post fishing (very tired)</div>
-  </div>
+    <div class="mySlides2 fade">
+ 
+      <img src="img/card2.jpg" style="width:100%">
   
-    <div class="mySlides fade">
-    <div class="numbertext">11 / 14</div>
-    <img src="img/wedding.jpg" style="width:100%">
-    <div class="text">your bfs wedding</div>
-  </div>
+    </div>
 
-     <div class="mySlides fade">
-    <div class="numbertext">12 / 14</div>
-    <img src="img/wedding2.jpg" style="width:100%">
-    <div class="text">The Scroll</div>
-  </div>
+    <div class="mySlides2 fade">
+     
+      <img src="img/card3.jpg" style="width:100%">
+ 
+    </div>
+
+    <div class="mySlides2 fade">
+    
+      <img src="img/card4.jpg" style="width:100%">
+ 
+    </div>
+
+    <div class="mySlides2 fade">
+     
+      <img src="img/card5.jpg" style="width:100%">
   
-     <div class="mySlides fade">
-    <div class="numbertext">13 / 14</div>
-    <img src="img/devilLake.jpg" style="width:100%">
-    <div class="text">Devils Lake</div>
-  </div>
+    </div>
+
+    <div class="mySlides2 fade">
+ 
+      <img src="img/card6.jpg" style="width:100%">
+   
+    </div>
+
+    <div class="mySlides2 fade">
+   
+      <img src="img/card7.jpg" style="width:100%">
   
-     <div class="mySlides fade">
-    <div class="numbertext">14 / 14</div>
-    <img src="img/sisgrad.jpg" style="width:100%">
-    <div class="text">your sisters grad party</div>
-  </div>
-  <!-- Top arrows container (buttons placed above the image, next to each other) -->
-  <div class="arrow-top">
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+
+    <div class="arrow-top">
+      <a class="prev" onclick="plusSlides2(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides2(1)">&#10095;</a>
+    </div>
   </div>
 </div>
 <br>
 
-<!-- The dots/circles -->
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span>
-  <span class="dot" onclick="currentSlide(2)"></span>
-  <span class="dot" onclick="currentSlide(3)"></span>
+<!-- Dots for each slideshow -->
+<div style="display:flex;gap:500px;justify-content:center;">
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide1(1)"></span>
+    <span class="dot" onclick="currentSlide1(2)"></span>
+    <span class="dot" onclick="currentSlide1(3)"></span>
+    <span class="dot" onclick="currentSlide1(4)"></span>
+    <span class="dot" onclick="currentSlide1(5)"></span>
+    <span class="dot" onclick="currentSlide1(6)"></span>
+    <span class="dot" onclick="currentSlide1(7)"></span>
+  </div>
+  
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide2(1)"></span>
+    <span class="dot" onclick="currentSlide2(2)"></span>
+    <span class="dot" onclick="currentSlide2(3)"></span>
+    <span class="dot" onclick="currentSlide2(4)"></span>
+    <span class="dot" onclick="currentSlide2(5)"></span>
+    <span class="dot" onclick="currentSlide2(6)"></span>
+    <span class="dot" onclick="currentSlide2(7)"></span>
+  </div>
 </div>
   
 
     <main>
-    </main>
-    <footer>
-        <p> April 09 | Gus and Abby | 2025 - 2026 </p>
-    </footer>
- <script>
-  let slideIndex = 1;
-showSlides(slideIndex);
+      </main>
+      <footer>
+          <p> April 09 | Gus and Abby | 2025 - 2026 </p>
+      </footer>
+   <script>
+    // Left slideshow
+    let slideIndex1 = 1;
+    showSlides1(slideIndex1);
 
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+    function plusSlides1(n) { showSlides1(slideIndex1 += n); }
+    function currentSlide1(n) { showSlides1(slideIndex1 = n); }
+    function showSlides1(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides1");
+      let dots = document.querySelectorAll('#slideshow1 + br ~ div > div:first-child .dot, #slideshow1 ~ div .dot');
+      if (n > slides.length) { slideIndex1 = 1 }
+      if (n < 1) { slideIndex1 = slides.length }
+      for (i = 0; i < slides.length; i++) slides[i].style.display = "none";
+      // dots for slideshow1 are the first group — simpler to query by position in DOM below, so just update by index
+      const dotGroup1 = document.querySelectorAll('div[style*="display:flex"] > div:first-child .dot');
+      for (i = 0; i < dotGroup1.length; i++) dotGroup1[i].className = dotGroup1[i].className.replace(" active", "");
+      slides[slideIndex1-1].style.display = "block";
+      if (dotGroup1[slideIndex1-1]) dotGroup1[slideIndex1-1].className += " active";
+    }
 
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+    // Right slideshow
+    let slideIndex2 = 1;
+    showSlides2(slideIndex2);
 
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
-    </script>
-</body>
-</html>
+    function plusSlides2(n) { showSlides2(slideIndex2 += n); }
+    function currentSlide2(n) { showSlides2(slideIndex2 = n); }
+    function showSlides2(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides2");
+      const dotGroup2 = document.querySelectorAll('div[style*="display:flex"] > div:last-child .dot');
+      if (n > slides.length) { slideIndex2 = 1 }
+      if (n < 1) { slideIndex2 = slides.length }
+      for (i = 0; i < slides.length; i++) slides[i].style.display = "none";
+      for (i = 0; i < dotGroup2.length; i++) dotGroup2[i].className = dotGroup2[i].className.replace(" active", "");
+      slides[slideIndex2-1].style.display = "block";
+      if (dotGroup2[slideIndex2-1]) dotGroup2[slideIndex2-1].className += " active";
+    }
+      </script>
+  </body>
+  </html>
