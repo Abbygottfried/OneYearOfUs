@@ -4,27 +4,89 @@
 <meta charset="UTF-8" />
 <title>Strawberry Milk Envelope</title>
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #ffeef7; /* strawberry milk background */
-    font-family: "Poppins", sans-serif;
-  }
+      body {
+            font-family: 'Arial', Helvetica, sans-serif;
+            background-color: #fbceda ;
+            color: rgb(65, 0, 17);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    main {
+      display: flex;
+      justify-content: center; /* center envelope horizontally */
+      align-items: center;     /* center vertically within main */
+      padding: 20px;
+      min-height: 60vh;       /* give the main area some vertical space for centering */
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+        header img {
+            width: 100%;
+            max-width: 100px;
+            height: auto;
+        }
+        /* Main Section Styling */
+        section {
+            flex: 2;
+            padding: 20px;
+        }
+
+        section header {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+         header {
+            background-color: #fbceda;
+            color: rgb(144, 1, 1);
+            padding: 25px 0;
+            text-align: center;
+            font-size: 5em;
+            letter-spacing: 2px;
+        }
+          /* Footer Section */
+        footer {
+            background-color: rgb(65, 0, 17);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+
+        /* Navigation Bar */
+        nav {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: rgb(65, 0, 17);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 0 15px;
+            transition: background-color 0.3s;
+        }
 
   .envelope-container {
     position: relative;
-    width: 440px;
-    height: 360px;
+    width: 600px;
+    height: 500px;
   }
 
   /* Envelope body (white) */
   .envelope {
     position: relative;
     width: 100%;
-    height: 250px;
+    height: 350px;
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.15);
@@ -51,7 +113,7 @@
     transform-origin: top center;
     transform: translateX(-50%);
     border-style: solid;
-    border-width: 130px 220px 0 220px;
+    border-width: 230px 320px 0 320px;
     border-color: #ffcfe6 transparent transparent transparent; /* strawberry milk pink */
     transition: transform 0.7s ease;
     z-index: 3;
@@ -67,18 +129,19 @@
     left: 50%;
     bottom: 0;
     transform: translate(-50%, 100%);
-    width: 350px;
-    height: 210px;
+    width: 550px;
+    height: 270px;
     background: #fffdf8;
     border-radius: 10px;
-    padding: 22px;
+    padding: 10px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     transition: transform 0.8s ease 0.3s;
     z-index: 2;
+    text-align: center; /* center the letter text */
   }
 
   .open .letter {
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -10%);
   }
 
   .letter h2 {
@@ -96,11 +159,11 @@
   /* Heart stamp */
   .heart-stamp {
     position: absolute;
-    top: 95px;
+    top: 200px;
     left: 50%;
     transform: translateX(-50%);
     width: 55px;
-    height: 55px;
+    height: px;
     cursor: pointer;
     z-index: 4;
     transition: transform 0.4s ease, opacity 0.4s ease;
@@ -115,19 +178,19 @@
     height: 48px;
     background: #ff6b9c; /* strawberry heart pink */
     border-radius: 32px 32px 0 0;
-    top: 6px;
+    top: -15px;
   }
 
   .heart-stamp::before {
-    left: 1px; /* pulled inward */
+    left: 0px; /* pulled inward */
     transform: rotate(-45deg);
-    transform-origin: bottom right;
+    transform-origin: right center;
   }
 
   .heart-stamp::after {
-    right: 1px; /* pulled inward */
+    right: 0px; /* pulled inward */
     transform: rotate(45deg);
-    transform-origin: bottom left;
+    transform-origin: left center;
   }
 
   /* Heart falling animation */
@@ -140,14 +203,29 @@
     100% { transform: translateX(-50%) translateY(380px); opacity: 1; }
   }
 </style>
+
 </head>
 <body>
 
+      <header>
+       <img src="img/heart.png" alt="SDHeart">
+        One Year of Us
+         <img src="img/heart.png" alt="SDHeart">
+    </header>
+
+    <nav>
+        <a href="adventures.html">Our Adventures</a>
+        <a href="game.html">Game</a>
+        <a href="slideshow.html">Slide Show</a>
+        <a href="stats.html">Stats</a>
+        <a href="LoveLetter.html">Love Letter</a>
+    </nav>
+    <main>
 <div class="envelope-container">
   <div class="envelope" id="env">
     <div class="flap"></div>
 
-    <div class="letter">
+    <div class="letter" text-align="center">
       <h2>Hi sweetheart</h2>
       <p>
         Just a tiny note wrapped in strawberry milk softness.  
@@ -158,7 +236,10 @@
     <div class="heart-stamp" id="heart"></div>
   </div>
 </div>
-
+</main>
+    <footer>
+        <p> April 09 | Gus and Abby | 2025 - 2026 </p>
+    </footer>
 <script>
   const heart = document.getElementById("heart");
   const env = document.getElementById("env");
@@ -179,4 +260,5 @@
 </script>
 
 </body>
+
 </html>
