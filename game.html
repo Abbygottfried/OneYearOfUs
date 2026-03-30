@@ -144,40 +144,51 @@
         margin: 0 auto;
         align-items: center;
     }
-        #gameContainer {
-        width: 400px;
-        height: 400px;
-        position: relative;
-        margin: 40px auto;
-        border: 3px solid black;
-        background: white;
-        overflow: hidden;
+    #gameContainer {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    margin: 40px auto;
+    border: 3px solid black;
+    overflow: hidden;
+    /* use the GAMECOVER image to fill the whole game window */
+    background-image: url('img/GameCover.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    }
+
+        #startScreen, #gameOverScreen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* ensure overlay is above the canvas */
         }
 
-    #startScreen, #gameOverScreen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.4);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* ensure overlay is above the canvas */
-    }
+        /* start screen shouldn't dim the cover image; move Play button lower */
+        #startScreen {
+            background: transparent;
+            justify-content: flex-end; /* push content toward bottom */
+            padding-bottom: 28px; /* spacing from bottom */
+        }
 
         #startScreen img {
         width: 180px;
         margin-bottom: 20px;
         }
 
-                /* ensure canvas sits below overlays */
+                /* ensure canvas sits below overlays and is transparent so the container background shows through */
                 #gameCanvas {
                     position: relative;
                     z-index: 0;
                     display: block;
+                
                 }
 
         #playBtn, #restartBtn {
@@ -194,19 +205,18 @@
         padding: 20px;
         }
 
-        #scorePanel {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        font-size: 16px;
-        font-weight: bold;
-        z-index: 5;
-        display: flex;
-        gap: 15px;
-        background: rgba(255,255,255,0.7);
-        padding: 4px 8px;
-        border-radius: 6px;
-        }
+    #scorePanel {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 1010; /* above start screen so score stays visible on top of the cover */
+    display: flex;
+    gap: 15px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    }
 
         .shake {
         animation: shake 0.3s;
@@ -239,7 +249,6 @@
 
         <div id="gameContainer">
         <div id="startScreen">
-            <img src="img/heart.png" alt="Start Image">
             <button id="playBtn">Play</button>
         </div>
 
