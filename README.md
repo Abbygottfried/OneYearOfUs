@@ -1,2 +1,3 @@
 # OneYearOfUs
-This website show cases the year's recap of me and my boyfriends for our anniversary.
+This website showcases the year's recap of my boyfriend and me.
+https://abbygottfried.github.io/OneYearOfUs/Index.html
