@@ -171,11 +171,12 @@
         z-index: 1000; /* ensure overlay is above the canvas */
         }
 
-        /* start screen shouldn't dim the cover image; move Play button lower */
+        /* start screen shouldn't dim the cover image; position Play button ~1/4 down the window */
         #startScreen {
             background: transparent;
-            justify-content: flex-end; /* push content toward bottom */
-            padding-bottom: 28px; /* spacing from bottom */
+            justify-content: flex-start; /* start at top */
+            padding-top: 85%; /* push Play button down roughly 1/4 of the container */
+            padding-bottom: 0;
         }
 
         #startScreen img {
@@ -208,13 +209,13 @@
     #scorePanel {
     position: absolute;
     top: 10px;
-    left: 0px;
+    left: 10px;
     font-size: 18px;
     font-weight: bold;
     z-index: 1010; /* above start screen so score stays visible on top of the cover */
     display: flex;
     gap: 15px;
-    padding: 4px 8px;
+    padding: 6px 10px;
     border-radius: 6px;
     }
 
@@ -286,9 +287,10 @@
             carImg.src = "img/car2.png";
 
             // Player
-            let bird = { x: 60, y: 200, width: 40, height: 40, velocity: 0 };
-            let gravity = 0.35;
-            let jump = -6;
+            let bird = { x: 60, y: 200, width: 60, height: 40, velocity: 0 };
+            // increase gravity and jump so player motion is snappier (falls and rises faster)
+            let gravity = 0.9;
+            let jump = -8;
 
             // Cars
             let cars = [];
@@ -299,7 +301,7 @@
 
             // Background scroll
             let bgX = 0;
-            let bgSpeed = 2;
+            let bgSpeed = 6; // increase background scroll to restore original pace
 
             // Hearts
             let hearts = [];
@@ -338,10 +340,13 @@
             }
 
             function restartGame() {
+            // Return to the game's start screen
             document.getElementById("gameOverScreen").style.display = "none";
-            gameRunning = true;
+            document.getElementById("startScreen").style.display = "flex";
+            gameRunning = false;
             resetGame();
-            loop();
+            // clear the canvas so the container background (GameCover) is visible on the start screen
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
 
             function resetGame() {
@@ -398,12 +403,14 @@
                 cars.push({
                 x: canvas.width,
                 y: y,
-                speed: isFast ? 5 : 3,
+                // obstacles faster now; background (road) speed left unchanged
+                speed: isFast ? 14 : 9,
                 scored: false,
                 fast: isFast
                 });
 
-                spawnCooldown = Math.floor(Math.random() * 40) + 60; // 60–100 frames
+                // spawn more often (shorter cooldown) so gameplay pace increases
+                spawnCooldown = Math.floor(Math.random() * 20) + 30; // 30–50 frames
             }
 
             // Move cars

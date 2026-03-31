@@ -83,14 +83,14 @@
             max-width: 200px;
             height: auto;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgb(65, 0, 17);
+            
         }
           article img {
             width: 100%;
             max-width: 600px;
             height: auto;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgb(65, 0, 17);
+
         }
          header img {
             width: 100%;
@@ -154,7 +154,7 @@
         .heart-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
         .day-label{font-size:18px;text-transform:lowercase;color:rgb(65,0,17);font-weight:700}
         .heart-box{position:relative;display:flex;align-items:center;justify-content:center}
-        .heart{width:160px;height:auto;filter:drop-shadow(0 8px 20px rgba(232,59,80,0.18));transform-origin:center center;animation:pulse 1.6s ease-in-out infinite}
+        .heart{width:160px;height:auto;transform-origin:center center;animation:pulse 1.6s ease-in-out infinite}
         .day-count{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:36px;font-weight:800;color:white;letter-spacing:1px;text-shadow:0 4px 12px rgba(0,0,0,0.5)}
         @keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.12)}100%{transform:scale(1)}}
         @media (prefers-reduced-motion:reduce){.heart{animation:none}}
@@ -164,6 +164,30 @@
         .sdv-wrap img{display:block;width:100%;height:auto}
         .sdv-text{width:55%;position:absolute;left:19%;top:55%;transform:translate(-30%,-70%);font-family:'StardewValley','Fredoka One',cursive;font-size:30px;color:#4f2d07;text-align:left;pointer-events:none;text-shadow:0 1px 5px rgba(0,0,0,0.6)}
         @media (max-width:155px){.sdv-text{font-size:5px}}
+    /* SDV characters row and popup bubble */
+    .sdv-characters-section{margin-top:60px;padding-bottom:10px}
+    .sdv-characters{display:flex;gap:18px;justify-content:center;align-items:flex-end}
+        /* make each char wrapper a fixed-height flexbox so image bottoms align */
+        .char-wrap{position:relative;width:96px;max-width:120px;display:flex;align-items:flex-end;height:120px}
+        /* keep all character images the same width (fill wrapper) and let height vary */
+        /* removed the drop-shadow per user request (no shadow boxes) */
+        .sdv-char{display:block;width:100%;height:auto;cursor:pointer;border-radius:8px;box-shadow:none;transition:transform .12s}
+    /* when two .sdv-banner sections are stacked, add more vertical space before the character row */
+    .sdv-banner + .sdv-banner { margin-top: 150px; }
+    .sdv-char:active{transform:translateY(2px)}
+    /* bubble now contains an image and text overlay; no solid background color */
+    .bubble{position:absolute;left:65%;bottom:calc(100% + 12px);transform:translateX(-50%);background:transparent;color:#fff;padding:0;z-index:1000;font-size:14px;overflow:hidden;min-width:120px}
+    /* raise bubble slightly for Abby and Gus (middle two characters) */
+    .char-wrap.abby .bubble{ bottom: calc(100% + 80px); }
+    .char-wrap.gus .bubble { bottom: calc(100% + 100px); }
+    .char-wrap.Dog .bubble{ bottom: calc(100% + 10px); }
+    .char-wrap.Cat .bubble { bottom: calc(100% + 0px); }
+    .bubble-img{display:block;width:80px;height:auto;max-width:160px;object-fit:cover;display:block}
+    .bubble-text{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);color:#fff;padding:6px 8px;font-size:13px;text-shadow:0 2px 6px rgba(0,0,0,0.7);white-space:nowrap}
+    .fade-out{animation:fadeOut .6s forwards}
+    @keyframes fadeOut{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(-8px)}}
+    @media (max-width:520px){.sdv-characters{gap:10px}.char-wrap{width:72px}}
+        @media (max-width:520px){.sdv-characters{gap:10px}.char-wrap{width:72px;height:96px}}
     </style>
 </head>
 <body>
@@ -203,11 +227,25 @@
             <div class="sdv-text" id="sdvText">Hello my love, hope you are enjoying the site! I'm here to tell you we've played 31 hours and 46 minutes on StardewValley.</div>
         </div>
     </section>
-    <img src="img/SDVDog.png" alt="racooons" style="display:block;margin:20px auto;max-width:100px;width:100%;height:auto;">
-    <img src="img/SDVAbby.png" alt="racooons" style="display:block;margin:20px auto;max-width:100px;width:100%;height:auto;">
-    <img src="img/SDVGus.png" alt="racooons" style="display:block;margin:20px auto;max-width:100px;width:100%;height:auto;">
-    <img src="img/SDVCat.png" alt="racooons" style="display:block;margin:20px auto;max-width:100px;width:100%;height:auto;">
-    </body>
+<section class="sdv-banner" aria-label="SDV banner">
+
+           <div class="char-wrap Dog">
+                <img class="sdv-char" src="img/SDVDog.png" alt="Dog"  data-bubble-img="img/SDHeart.png">
+            </div>
+            <div class="char-wrap abby">
+                <img class="sdv-char" src="img/SDVAbby.png" alt="Abby"  data-bubble-img="img/SDHeart.png">
+            </div>
+            <div class="char-wrap gus">
+                <img class="sdv-char" src="img/SDVGus.png" alt="Gus"  data-bubble-img="img/SDVsmile.png">
+            </div>
+     
+            <div class="char-wrap Cat">
+                <img class="sdv-char" src="img/SDVCat.png" alt="Cat"  data-bubble-img="img/SDHeart.png">
+            </div>
+     
+
+        </div>
+    </section>
     <footer>
         <p> April 09 | Gus and Abby | 2025 - 2026 </p>
     </footer>
@@ -227,6 +265,43 @@
             // refresh once per minute in case page stays open across midnight
             setInterval(update, 60*1000);
         })();
+    </script>
+    <script>
+    // SDV character bubble popups
+    (function(){
+        const chars = document.querySelectorAll('.sdv-char');
+        if(!chars || chars.length===0) return;
+
+        chars.forEach(img=>{
+            img.addEventListener('click', function(ev){
+                ev.stopPropagation();
+                const wrap = img.parentElement;
+                // toggle existing bubble for this char
+                const existing = wrap.querySelector('.bubble');
+                if(existing){ existing.remove(); return; }
+                const msg = img.dataset.message || '';
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                // image for bubble (from data attribute or fall back to character src)
+                const imgSrc = img.dataset.bubbleImg || img.src;
+                const bImg = document.createElement('img');
+                bImg.className = 'bubble-img';
+                bImg.src = imgSrc;
+                bImg.alt = '';
+                bubble.appendChild(bImg);
+                const t = document.createElement('div');
+                t.className = 'bubble-text';
+                t.textContent = msg;
+                bubble.appendChild(t);
+                wrap.appendChild(bubble);
+                // auto-hide after 3s with fade
+                setTimeout(()=>{ bubble.classList.add('fade-out'); setTimeout(()=>bubble.remove(), 600); }, 3000);
+            });
+        });
+
+        // clicking elsewhere closes any open bubble
+        document.addEventListener('click', () => document.querySelectorAll('.bubble').forEach(b=>b.remove()));
+    })();
     </script>
 </body>
 </html>
