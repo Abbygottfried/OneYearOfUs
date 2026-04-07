@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="js/turn.min.js"></script>
     <title>Gus and Abby</title>
     <style>
         /* General Body and Layout Styling */
@@ -213,7 +216,44 @@ animation-delay: 1.6s;
     }
 }
 
+/* center the magazine in the middle column: take ~66% of page width with a sensible max */
+#magazine-container{width:66%;max-width:1200px;margin:100px auto 32px;}
 
+
+
+#magazine-container{
+  width:100%;
+  justify-content: center;
+  margin-top: 20px;
+  background-color: #fbceda;
+  padding: 20px;
+}
+
+#magazine{
+	width:60%;
+  height: 80vh;
+  margin: 0 auto;
+  
+}
+
+#magazine .turn-page{
+	background-color:#fbceda;
+	background-size:100% 100%;
+}
+
+#magazine-container button{
+  background-color: #e62e5f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  margin: 10px;
+  align-items: center;
+}
     </style>
 </head>
 <body>
@@ -255,7 +295,8 @@ animation-delay: 1.6s;
 
             </header>
             <article>
-              happy one year to the loml bLLAAAHHHHH BLAH BLAH
+              Happy one year to the to the love of my life! I made this website about us and things that remind me of us.
+              I hope you like it :)
             </br>
             </article>  
         </section>
@@ -263,12 +304,50 @@ animation-delay: 1.6s;
             <img src="img/portchHug.jpg" alt="PicOfUs">
         </aside>
 
-    </main>
+    <br>
+     </main>
+    <div id="magazine-container">
+	<div id="magazine">
+		<div style="background-image:url(img/Page1.png);"></div>
+		<div style="background-image:url(img/Page2.png);"></div>
+        <div style="background-image:url(img/Page3.png);"></div>
+        <div style="background-image:url(img/Page4.png);"></div>
+        <div style="background-image:url(img/Page5.png);"></div>
+        <div style="background-image:url(img/Page6.png);"></div>
+        <div style="background-image:url(img/Page7.png);"></div>
+        <div style="background-image:url(img/Page8.png);"></div>
+        <div style="background-image:url(img/Page9.png);"></div>
+        <div style="background-image:url(img/Page10.png);"></div>
+	</div>
+
+  <div class="d-flex justify-content-center my-4">
+    <button onclick="$('#magazine').turn('previous')">Previous</button>
+    <button onclick="$('#magazine').turn('next')">Next</button>
+  </div>
+</div>
+   
     <footer>
         <p> April 09 | Gus and Abby | 2025 - 2026 </p>
     </footer>
-</body>
-</html>
-
+    <script>
+        // initialize the turn.js magazine when the document is ready
+        (function(){
+            if(window.jQuery && $.fn.turn){
+                $(function(){
+                    // sensible defaults matching the CSS used elsewhere
+                    var w = 1000, h = 600;
+                    // if container is narrower, scale down
+                    var containerW = $('#magazine-container').width();
+                    if(containerW && containerW < w) {
+                        w = containerW;
+                        h = Math.round(w * 600 / 900);
+                    }
+                    $('#magazine').turn({width: w, height: h, autoCenter: true});
+                });
+            } else {
+                console.warn('turn.js or jQuery not loaded; magazine not initialized');
+            }
+        })();
+    </script>
 </body>
 </html>
